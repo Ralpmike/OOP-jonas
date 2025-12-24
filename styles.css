@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+body {
+  margin: 20px;
+}
+/** NavBar */
+/* Basic navbar styling */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #333;
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Mobile menu toggle hidden on desktop */
+.menu-toggle {
+  font-size: 25px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 85px;
+    background: #444;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    border-radius: 8px;
+   
+    /* Animation defaults */
+    opacity: 0;
+    left: -100%;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .nav-links li {
+    padding: 15px;
+  }
+
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  /* When active */
+  .nav-links.active {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+
+
+/* ? Accordion */
+.toggler {
+  font-size: 18px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid rgb(32, 44, 32) 1px;
+
+}
+
+.toggler.active{
+  transition: transform .1s ease;
+  transform: rotate(60deg);
+}
+.accordion_item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+  border: solid rgb(32, 44, 32) 1px;
+  max-width: 600px;
+  padding: 12px;
+  
+}
+
+.accordion_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.accordion_content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .6s ease-out;
+}
+
+
+.accordion_item.active .accordion_content{
+  max-height: 200px;
+}
+
+
