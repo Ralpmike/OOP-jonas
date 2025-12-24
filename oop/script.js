@@ -777,3 +777,55 @@ jay.introduce()
 }
 
 
+
+
+{
+//?ES6 classes
+class Acount{
+  constructor(owner, currency, pin){
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account ${this.owner}`);
+  }
+
+  //? Public interface - methods(API)
+  deposit(val){
+    this.movements.push(val);
+  }
+  withDrawal(val){
+    this.movements.push(-val);
+  }
+
+  approveLoan(val){
+    return true;
+  }
+
+  requestLoan(val){
+    if(this.approveLoan(val)){
+      this.movements.push(val);
+      console.log(`Loan approved`);
+    }
+  }
+
+  balance(){
+    return this.movements.reduce((acc, mov) => acc + mov, 0);
+  }
+}
+
+const acct1 = new Acount("Raphael", "USD", 1111);
+console.log(acct1);
+acct1.deposit(250);
+acct1.withDrawal(140);
+console.log(acct1.movements);
+console.log(acct1.balance());
+
+acct1.requestLoan(1000);
+console.log(acct1.movements);
+console.log(acct1.balance());
+
+
+}
