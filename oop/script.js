@@ -781,51 +781,62 @@ jay.introduce()
 
 {
 //?ES6 classes
+//? Data encapsulation: Private Class fileds and methods
+
+//?1) Public fields
+//?2) Private fields
+//?3) Public methods
+//?4) Private methods
+//? STATIC versions of these 4
 class Acount{
+  //?Public fields
+  local = navigator.language
+  bank = "First National Bank";
+
+  //?Private fields
+  #movements = [];
+  #pin;
   constructor(owner, currency, pin){
     this.owner = owner;
     this.currency = currency;
-    this.pin = pin;
-    this.movements = [];
-    this.locale = navigator.language;
+    this.#pin = pin;
+    // this.movements = [];
+    // this.locale = navigator.language;
 
     console.log(`Thanks for opening an account ${this.owner}`);
   }
 
   //? Public interface - methods(API)
   deposit(val){
-    this.movements.push(val);
+    this.#movements.push(val);
   }
   withDrawal(val){
-    this.movements.push(-val);
+    this.#movements.push(-val);
   }
 
-  approveLoan(val){
+  //?Private methods
+  #approveLoan(val){
     return true;
   }
 
   requestLoan(val){
-    if(this.approveLoan(val)){
-      this.movements.push(val);
+    if(this.#approveLoan(val)){
+      this.#movements.push(val);
       console.log(`Loan approved`);
     }
   }
 
   balance(){
-    return this.movements.reduce((acc, mov) => acc + mov, 0);
+    return this.#movements.reduce((acc, mov) => acc + mov, 0);
   }
 }
 
 const acct1 = new Acount("Raphael", "USD", 1111);
+acct1.deposit(500);
+acct1.withDrawal(100);
 console.log(acct1);
-acct1.deposit(250);
-acct1.withDrawal(140);
-console.log(acct1.movements);
-console.log(acct1.balance());
-
-acct1.requestLoan(1000);
-console.log(acct1.movements);
-console.log(acct1.balance());
+// console.log(acct1.#approveLoan(1000));
+// acct1.#movements.push(50);
 
 
 }
